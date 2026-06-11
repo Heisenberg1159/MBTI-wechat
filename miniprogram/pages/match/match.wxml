@@ -1,0 +1,117 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <view class="nav-home">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+  <view class="page-header">
+    <text class="page-title">类型匹配度</text>
+    <text class="page-subtitle">选择两个 MBTI 类型，查看匹配度分析</text>
+  </view>
+
+  <!-- 选择器 A -->
+  <view class="selector-section">
+    <text class="selector-label">类型一</text>
+    <scroll-view class="type-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="type-chips">
+        <view
+          class="type-chip {{typeA.code === item.code ? 'chip-active' : ''}}"
+          wx:for="{{allTypes}}"
+          wx:key="code"
+          bindtap="selectTypeA"
+          data-code="{{item.code}}"
+          style="{{typeA.code === item.code ? 'background: ' + item.softColor + '; border-color: ' + item.color : ''}}"
+        >
+          <text class="chip-emoji">{{item.emoji}}</text>
+          <text class="chip-code" style="color: {{item.color}}">{{item.code}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- VS -->
+  <view class="vs-divider">
+    <view class="vs-line"></view>
+    <text class="vs-text">VS</text>
+    <view class="vs-line"></view>
+  </view>
+
+  <!-- 选择器 B -->
+  <view class="selector-section">
+    <text class="selector-label">类型二</text>
+    <scroll-view class="type-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="type-chips">
+        <view
+          class="type-chip {{typeB.code === item.code ? 'chip-active' : ''}}"
+          wx:for="{{allTypes}}"
+          wx:key="code"
+          bindtap="selectTypeB"
+          data-code="{{item.code}}"
+          style="{{typeB.code === item.code ? 'background: ' + item.softColor + '; border-color: ' + item.color : ''}}"
+        >
+          <text class="chip-emoji">{{item.emoji}}</text>
+          <text class="chip-code" style="color: {{item.color}}">{{item.code}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 匹配结果 -->
+  <view class="match-card card" wx:if="{{match}}">
+    <!-- 分数环 -->
+    <view class="score-ring-wrap">
+      <view class="score-ring" style="border-color: {{match.levelColor}}">
+        <text class="score-num" style="color: {{match.levelColor}}">{{match.score}}%</text>
+      </view>
+    </view>
+    <text class="match-level" style="color: {{match.levelColor}}">{{match.levelEmoji}} {{match.level}}</text>
+
+    <view class="match-stats">
+      <view class="match-stat">
+        <text class="match-stat-value">{{match.letterMatch}}/4</text>
+        <text class="match-stat-label">字母匹配</text>
+      </view>
+      <view class="match-stat-divider"></view>
+      <view class="match-stat">
+        <text class="match-stat-value">{{match.isCompatible ? '是' : '否'}}</text>
+        <text class="match-stat-label">官方推荐</text>
+      </view>
+    </view>
+
+    <!-- 总览 -->
+    <view class="match-section">
+      <text class="match-section-title">📋 总览</text>
+      <text class="match-section-text">{{match.summary}}</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 沟通 -->
+    <view class="match-section">
+      <text class="match-section-title">💬 沟通</text>
+      <text class="match-section-text">{{match.communication}}</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 工作 -->
+    <view class="match-section">
+      <text class="match-section-title">💼 工作</text>
+      <text class="match-section-text">{{match.work}}</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 情感 -->
+    <view class="match-section">
+      <text class="match-section-title">❤️ 情感</text>
+      <text class="match-section-text">{{match.romance}}</text>
+    </view>
+  </view>
+
+  <!-- CTA -->
+  <view class="match-cta">
+    <button class="btn-primary" bindtap="startQuiz">测测你的类型</button>
+  </view>
+</view>

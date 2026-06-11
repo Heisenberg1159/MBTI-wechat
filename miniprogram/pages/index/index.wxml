@@ -1,0 +1,71 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <!-- 背景网格 -->
+  <view class="bg-grid"></view>
+  <view class="bg-glow bg-glow-1"></view>
+  <view class="bg-glow bg-glow-2"></view>
+
+  <!-- 主内容 -->
+  <view class="hero">
+    <view class="hero-badge">
+      <view class="glow-dot"></view>
+      <text class="hero-badge-text">MBTI</text>
+    </view>
+    <text class="hero-title">发现你的</text>
+    <text class="hero-title text-gradient">性格密码</text>
+    <text class="hero-subtitle">基于荣格心理类型理论 · 四维倾向分析</text>
+  </view>
+
+  <!-- 版本选择 -->
+  <view class="versions">
+    <view class="version-card card {{selectedVersion === 'quick' ? 'version-active' : ''}}" bindtap="selectVersion" data-version="quick">
+      <view class="version-header">
+        <text class="version-name">速测版</text>
+        <view class="version-badge" wx:if="{{selectedVersion === 'quick'}}">
+          <text class="version-badge-text">已选</text>
+        </view>
+      </view>
+      <text class="version-desc">28 题 · 约 3 分钟</text>
+      <text class="version-detail">快速得出四维倾向，适合初次体验</text>
+    </view>
+
+    <view class="version-card card {{selectedVersion === 'full' ? 'version-active' : ''}}" bindtap="selectVersion" data-version="full">
+      <view class="version-header">
+        <text class="version-name">完整版</text>
+        <view class="version-popular">
+          <text class="version-popular-text">推荐</text>
+        </view>
+      </view>
+      <text class="version-desc">60 题 · 约 8 分钟</text>
+      <text class="version-detail">更高精度分析，适合深度自我探索</text>
+    </view>
+  </view>
+
+  <!-- 维度预览 -->
+  <view class="dims card">
+    <view class="dim-row" wx:for="{{dimensions}}" wx:key="key">
+      <text class="dim-side dim-left" style="color: {{item.leftColor}}">{{item.leftCode}} {{item.leftName}}</text>
+      <view class="dim-track">
+        <view class="dim-fill" style="background: {{item.gradient}}"></view>
+      </view>
+      <text class="dim-side dim-right" style="color: {{item.rightColor}}">{{item.rightCode}} {{item.rightName}}</text>
+    </view>
+  </view>
+
+  <!-- 开始按钮 -->
+  <view class="cta">
+    <button class="btn-primary cta-btn" bindtap="startQuiz">开始测试</button>
+    <text class="cta-hint">仅供趣味参考，非心理诊断</text>
+  </view>
+
+  <!-- 跳转 16 型百科 -->
+  <view class="types-entry card" bindtap="viewTypes">
+    <view class="types-entry-avatars">
+      <text class="types-entry-emoji">🏛️</text>
+      <text class="types-entry-emoji">🔬</text>
+      <text class="types-entry-emoji">⚔️</text>
+      <text class="types-entry-emoji">💡</text>
+    </view>
+    <text class="types-entry-label">浏览 16 种人格</text>
+    <text class="types-entry-arrow">›</text>
+  </view>
+</view>

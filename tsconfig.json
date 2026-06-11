@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["miniprogram/*"]
+    },
+    "lib": ["ES2020"]
+  },
+  "include": ["miniprogram/**/*.ts"],
+  "exclude": ["node_modules", "cloudfunctions"]
+}

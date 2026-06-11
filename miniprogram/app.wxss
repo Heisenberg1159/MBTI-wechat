@@ -1,0 +1,188 @@
+/* ===== Apple Design Language — Light System ===== */
+
+page {
+  --bg-primary: #F5F5F7;
+  --bg-secondary: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-hover: #EBEBF0;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-hover: rgba(255, 255, 255, 0.92);
+  --border: rgba(0, 0, 0, 0.06);
+  --border-hover: rgba(0, 0, 0, 0.12);
+  --accent: #007AFF;
+  --accent-soft: rgba(0, 122, 255, 0.08);
+  --accent-glow: rgba(0, 122, 255, 0.2);
+  --gradient-primary: linear-gradient(135deg, #007AFF, #5856D6);
+  --gradient-warm: linear-gradient(135deg, #FF9500, #FF3B30);
+  --gradient-cool: linear-gradient(135deg, #007AFF, #34C759);
+  --gradient-mixed: linear-gradient(135deg, #AF52DE, #FF9500);
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --text-tertiary: #AEAEB2;
+  --radius-sm: 8rpx;
+  --radius-md: 14rpx;
+  --radius-lg: 20rpx;
+  --radius-xl: 28rpx;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 卡片 — 毛玻璃 */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.card:active {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* 主按钮 */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-xl);
+  border: none;
+  letter-spacing: 0.5rpx;
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.25);
+  transition: all 0.2s;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-primary:active {
+  background: #0066D6;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+  transform: scale(0.98);
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  background: var(--surface);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  color: var(--accent);
+  font-size: 32rpx;
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-xl);
+  border: 0.5px solid rgba(0, 122, 255, 0.15);
+}
+
+.btn-secondary::after {
+  border: none;
+}
+
+/* 通用布局 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+/* 分割线 */
+.divider {
+  width: 100%;
+  height: 0.5px;
+  background: var(--border);
+}
+
+/* 标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 24rpx;
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-xl);
+  border: 0.5px solid rgba(0, 122, 255, 0.15);
+}
+
+/* 渐变文字 */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 发光点 */
+.glow-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8rpx var(--accent-glow);
+}
+
+/* 首页按钮 — 全局 */
+.nav-home {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 0 20rpx;
+}
+.nav-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 10rpx 24rpx;
+  background: var(--surface);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.15s;
+}
+.nav-home-btn:active {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0, 122, 255, 0.1);
+  transform: scale(0.96);
+}
+.nav-home-icon {
+  font-size: 28rpx;
+  color: var(--accent);
+  line-height: 1;
+}
+.nav-home-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}

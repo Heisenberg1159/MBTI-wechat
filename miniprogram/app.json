@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/quiz/quiz",
+    "pages/result/result",
+    "pages/history/history",
+    "pages/types/types",
+    "pages/type-detail/type-detail",
+    "pages/share-card/share-card",
+    "pages/match/match"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "MBTI 测试",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F5F7",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

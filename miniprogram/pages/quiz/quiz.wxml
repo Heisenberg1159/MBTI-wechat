@@ -1,0 +1,77 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <!-- 背景 -->
+  <view class="bg-glow"></view>
+
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+
+  <!-- 顶部进度 -->
+  <view class="progress-header">
+    <view class="progress-info">
+      <text class="progress-current">{{currentIndex + 1}}</text>
+      <text class="progress-sep">/</text>
+      <text class="progress-total">{{total}}</text>
+    </view>
+    <view class="progress-dim">
+      <view class="glow-dot"></view>
+      <text class="progress-dim-text">{{dimensionLabel}}</text>
+    </view>
+  </view>
+
+  <view class="progress-track">
+    <view class="progress-fill" style="width: {{progress}}%"></view>
+    <view class="progress-glow" style="left: {{progress}}%"></view>
+  </view>
+
+  <!-- 题目区域 -->
+  <view class="question-area {{animating ? (direction === 'forward' ? 'slide-out-left' : 'slide-out-right') : (direction === 'forward' ? 'slide-in-right' : 'slide-in-left')}}">
+    <text class="question-text">{{currentQuestion.text}}</text>
+  </view>
+
+  <!-- 选项 -->
+  <view class="options {{animating ? (direction === 'forward' ? 'slide-out-left' : 'slide-out-right') : (direction === 'forward' ? 'slide-in-right' : 'slide-in-left')}}">
+    <view
+      class="option-card {{selectedOption === 'A' ? 'option-selected option-a' : ''}} {{selectedOption && selectedOption !== 'A' ? 'option-dimmed' : ''}}"
+      bindtap="selectOption"
+      data-option="A"
+    >
+      <view class="option-indicator option-indicator-a {{selectedOption === 'A' ? 'indicator-active-a' : ''}}"></view>
+      <text class="option-text">{{currentQuestion.optionA.text}}</text>
+    </view>
+
+    <view
+      class="option-card {{selectedOption === 'B' ? 'option-selected option-b' : ''}} {{selectedOption && selectedOption !== 'B' ? 'option-dimmed' : ''}}"
+      bindtap="selectOption"
+      data-option="B"
+    >
+      <view class="option-indicator option-indicator-b {{selectedOption === 'B' ? 'indicator-active-b' : ''}}"></view>
+      <text class="option-text">{{currentQuestion.optionB.text}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="quiz-footer">
+    <view class="btn-back {{currentIndex === 0 ? 'btn-disabled' : ''}}" bindtap="goBack">
+      <text class="btn-back-icon">‹</text>
+      <text>上一题</text>
+    </view>
+    <text class="back-hint">已选答案不会丢失</text>
+  </view>
+
+  <!-- 退出确认弹窗 -->
+  <view class="modal-mask {{showConfirm ? 'modal-show' : ''}}" bindtap="cancelExit">
+    <view class="modal card" catchtap="">
+      <text class="modal-title">确定退出测试？</text>
+      <text class="modal-desc">当前答题进度会保留，下次可继续</text>
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-cancel" bindtap="cancelExit">继续答题</view>
+        <view class="modal-btn modal-btn-confirm" bindtap="confirmExit">退出</view>
+      </view>
+    </view>
+  </view>
+</view>

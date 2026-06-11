@@ -1,0 +1,161 @@
+<view class="container result-page" style="padding-top: {{statusBarHeight}}px">
+  <!-- 返回首页 -->
+  <view class="nav-home">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+
+  <block wx:if="{{hasResult}}">
+    <!-- 背景光斑 -->
+    <view class="bg-glow-result" style="background: {{typeData.color}}"></view>
+
+    <!-- 类型头卡 -->
+    <view class="type-hero" style="border-color: {{themeBorderColor}}">
+      <view class="type-mark" style="background: {{themeSoftColor}}">
+        <text class="type-emoji">{{typeData.emoji}}</text>
+      </view>
+      <text class="type-code" style="color: {{typeData.color}}">{{typeData.code}}</text>
+      <text class="type-name">{{typeData.name}}</text>
+      <text class="type-tagline">{{typeData.tagline}}</text>
+
+      <view class="type-stats">
+        <view class="type-stat">
+          <text class="type-stat-value">{{overallPercent}}%</text>
+          <text class="type-stat-label">倾向清晰度</text>
+        </view>
+        <view class="type-stat-divider"></view>
+        <view class="type-stat">
+          <text class="type-stat-value">{{overallLabel}}</text>
+          <text class="type-stat-label">整体判断</text>
+        </view>
+      </view>
+
+      <view class="type-traits">
+        <text class="tag" wx:for="{{typeData.traits}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 维度图 -->
+    <view class="dimensions-card">
+      <view class="section-head">
+        <text class="section-title">四维倾向</text>
+        <text class="section-subtitle">每维度独立计分</text>
+      </view>
+
+      <view class="dim-chart">
+        <view class="dim-row" wx:for="{{dimList}}" wx:key="key">
+          <view class="dim-top">
+            <text class="dim-title">{{item.title}}</text>
+            <text class="dim-result" style="color: {{item.resultColor}}">
+              {{item.leadCode}} {{item.leadName}} · {{item.leadPercent}}% {{item.strengthLabel}}
+            </text>
+          </view>
+
+          <view class="dim-axis">
+            <view class="dim-side">
+              <text class="dim-code" style="color: {{item.leftColor}}">{{item.leftCode}}</text>
+              <text class="dim-side-name">{{item.leftName}}</text>
+            </view>
+            <view class="dim-track">
+              <view class="dim-fill" style="width: {{item.leftPercent}}%; background: {{item.gradient}}"></view>
+              <view class="dim-indicator" style="left: {{item.markerPercent}}%; border-color: {{item.resultColor}}"></view>
+            </view>
+            <view class="dim-side dim-side-right">
+              <text class="dim-code" style="color: {{item.rightColor}}">{{item.rightCode}}</text>
+              <text class="dim-side-name">{{item.rightName}}</text>
+            </view>
+          </view>
+
+          <view class="dim-score-line">
+            <text>{{item.leftScore}} 题</text>
+            <text>{{item.rightScore}} 题</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 性格描述 -->
+    <view class="desc-card">
+      <view class="section-head">
+        <text class="section-title">性格画像</text>
+      </view>
+      <text class="desc-text">{{typeData.description}}</text>
+    </view>
+
+    <!-- 优势与盲区 -->
+    <view class="sw-card">
+      <view class="section-head">
+        <text class="section-title">优势与盲区</text>
+      </view>
+      <view class="sw-section">
+        <text class="sw-label sw-strength">优势</text>
+        <view class="sw-list">
+          <view class="sw-item" wx:for="{{typeData.strengths}}" wx:key="*this">
+            <view class="sw-dot sw-dot-strength"></view>
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <view class="sw-section sw-section-last">
+        <text class="sw-label sw-weakness">盲区</text>
+        <view class="sw-list">
+          <view class="sw-item" wx:for="{{typeData.weaknesses}}" wx:key="*this">
+            <view class="sw-dot sw-dot-weakness"></view>
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 职业方向 -->
+    <view class="career-card">
+      <view class="section-head">
+        <text class="section-title">适合探索</text>
+      </view>
+      <view class="career-list">
+        <view class="career-tag" wx:for="{{typeData.careers}}" wx:key="*this" style="background: {{themeSoftColor}}; color: {{typeData.color}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 高匹配类型 -->
+    <view class="compat-card" wx:if="{{compatibleList.length > 0}}">
+      <view class="section-head">
+        <text class="section-title">高匹配类型</text>
+        <text class="section-subtitle" bindtap="viewMatch">匹配度测试 ›</text>
+      </view>
+      <view class="compat-list">
+        <view class="compat-item" wx:for="{{compatibleList}}" wx:key="code" style="background: {{item.softColor}}">
+          <text class="compat-emoji">{{item.emoji}}</text>
+          <view class="compat-info">
+            <text class="compat-code" style="color: {{item.color}}">{{item.code}}</text>
+            <text class="compat-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作区 -->
+    <view class="actions">
+      <button class="btn-primary btn-share" open-type="share">分享给朋友</button>
+      <button class="btn-secondary" bindtap="generateCard">生成分享图片</button>
+      <view class="secondary-actions">
+        <button class="btn-secondary action-btn" bindtap="restart">重新测试</button>
+        <button class="btn-secondary action-btn" bindtap="viewHistory">查看记录</button>
+        <button class="btn-secondary action-btn" bindtap="viewTypes">16型百科</button>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="empty-result">
+    <text class="empty-icon">📊</text>
+    <text class="empty-title">暂无测试结果</text>
+    <text class="empty-desc">{{errorText}}</text>
+    <button class="btn-primary empty-action" bindtap="restart">开始测试</button>
+    <button class="btn-secondary empty-action" bindtap="goHome">返回首页</button>
+  </view>
+</view>

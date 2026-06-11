@@ -1,0 +1,25 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <view class="nav-home">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+  <view class="page-title">测试记录</view>
+
+  <view wx:if="{{list.length === 0}}" class="empty">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">还没有测试记录</text>
+    <button class="btn-primary" style="width: 320rpx; margin-top: 32rpx;" bindtap="goQuiz">去测试</button>
+  </view>
+
+  <view wx:else class="history-list">
+    <view class="history-item" wx:for="{{list}}" wx:key="timestamp" bindtap="viewDetail" data-index="{{index}}">
+      <view class="history-left">
+        <text class="history-code" style="color: {{item.color}}">{{item.typeCode}}</text>
+        <text class="history-name">{{item.name}}</text>
+      </view>
+      <text class="history-date">{{item.dateStr}}</text>
+    </view>
+  </view>
+</view>

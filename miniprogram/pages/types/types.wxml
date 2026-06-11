@@ -1,0 +1,33 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <view class="nav-home">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+  <view class="page-header">
+    <text class="page-title">16 种人格</text>
+    <text class="page-subtitle">探索每一种性格的独特之处</text>
+    <view class="page-header-link" bindtap="goMatch">
+      <text>查看类型匹配度 ›</text>
+    </view>
+  </view>
+
+  <view class="type-grid">
+    <view
+      class="type-card card"
+      wx:for="{{types}}"
+      wx:key="code"
+      bindtap="viewDetail"
+      data-code="{{item.code}}"
+      style="border-color: {{item.softColor}}"
+    >
+      <view class="type-card-emoji" style="background: {{item.softColor}}">
+        <text>{{item.emoji}}</text>
+      </view>
+      <text class="type-card-code" style="color: {{item.color}}">{{item.code}}</text>
+      <text class="type-card-name">{{item.name}}</text>
+      <text class="type-card-tagline">{{item.tagline}}</text>
+    </view>
+  </view>
+</view>

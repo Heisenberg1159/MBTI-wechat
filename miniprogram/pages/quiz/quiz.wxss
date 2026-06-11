@@ -1,0 +1,524 @@
+/* 背景 */
+.bg-glow {
+  position: fixed;
+  width: 500rpx;
+  height: 500rpx;
+  background: rgba(0, 122, 255, 0.05);
+  top: -150rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* 导航栏 */
+.nav-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* 进度区 */
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 24rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-info {
+  display: flex;
+  align-items: baseline;
+}
+
+.progress-current {
+  font-size: 48rpx;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.progress-sep {
+  font-size: 28rpx;
+  color: var(--text-tertiary);
+  margin: 0 4rpx;
+}
+
+.progress-total {
+  font-size: 26rpx;
+  color: var(--text-tertiary);
+  font-weight: var(--font-medium);
+}
+
+.progress-dim {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 6rpx 20rpx;
+  background: var(--accent-soft);
+  border: 0.5px solid rgba(0, 122, 255, 0.15);
+  border-radius: var(--radius-xl);
+}
+
+.progress-dim-text {
+  font-size: 22rpx;
+  color: var(--accent);
+  font-weight: var(--font-semibold);
+}
+
+/* 进度条 */
+.progress-track {
+  width: 100%;
+  height: 4rpx;
+  background: var(--border);
+  border-radius: 2rpx;
+  margin-bottom: 80rpx;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2rpx;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-glow {
+  position: absolute;
+  top: 50%;
+  width: 16rpx;
+  height: 16rpx;
+  transform: translate(-50%, -50%);
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12rpx var(--accent-glow), 0 0 24rpx rgba(0, 122, 255, 0.1);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 题目 */
+.question-area {
+  width: 100%;
+  margin-bottom: 56rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.question-text {
+  font-size: 44rpx;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+/* =============================================
+   选项 — Apple 毛玻璃风格
+   ============================================= */
+
+.options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* 选项卡片 — 默认毛玻璃 */
+.option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 36rpx 32rpx;
+  gap: 20rpx;
+  /* 毛玻璃基础 */
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  /* 流畅过渡 */
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.35s ease,
+    backdrop-filter 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease;
+}
+
+/* 按压反馈 */
+.option-card:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* 玻璃高光条纹 */
+.option-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1rpx;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(255, 255, 255, 0.6) 70%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* =============================================
+   选项 A — 蓝色调
+   ============================================= */
+
+.option-a.option-selected {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(50px) saturate(220%);
+  -webkit-backdrop-filter: blur(50px) saturate(220%);
+  border-color: rgba(0, 122, 255, 0.35);
+  box-shadow:
+    0 0 0 2rpx rgba(0, 122, 255, 0.08),
+    0 8px 32px rgba(0, 122, 255, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: optionPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.option-a.option-selected::before {
+  opacity: 1;
+}
+
+.option-a.option-selected .option-text {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+/* =============================================
+   选项 B — 紫色调
+   ============================================= */
+
+.option-b.option-selected {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(50px) saturate(220%);
+  -webkit-backdrop-filter: blur(50px) saturate(220%);
+  border-color: rgba(175, 82, 222, 0.35);
+  box-shadow:
+    0 0 0 2rpx rgba(175, 82, 222, 0.08),
+    0 8px 32px rgba(175, 82, 222, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: optionPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.option-b.option-selected::before {
+  opacity: 1;
+}
+
+.option-b.option-selected .option-text {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+/* 未选中项弱化 */
+.option-dimmed {
+  opacity: 0.45;
+  filter: blur(1rpx);
+  transform: scale(0.97);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================
+   弹跳动画
+   ============================================= */
+
+@keyframes optionPop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =============================================
+   指示器圆点
+   ============================================= */
+
+.option-indicator {
+  position: relative;
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-indicator-a {
+  background: rgba(0, 122, 255, 0.3);
+}
+
+.option-indicator-b {
+  background: rgba(175, 82, 222, 0.3);
+}
+
+/* 选中指示器 */
+.indicator-active-a,
+.indicator-active-b {
+  width: 22rpx;
+  height: 22rpx;
+  animation: indicatorPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.indicator-active-a {
+  background: #007AFF;
+  box-shadow:
+    0 0 0 6rpx rgba(0, 122, 255, 0.15),
+    0 0 16rpx rgba(0, 122, 255, 0.3);
+}
+
+.indicator-active-b {
+  background: #AF52DE;
+  box-shadow:
+    0 0 0 6rpx rgba(175, 82, 222, 0.15),
+    0 0 16rpx rgba(175, 82, 222, 0.3);
+}
+
+@keyframes indicatorPop {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 脉冲光环 — 选中后向外扩散 */
+.indicator-active-a::after,
+.indicator-active-b::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRing 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+.indicator-active-a::after {
+  box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.4);
+}
+
+.indicator-active-b::after {
+  box-shadow: 0 0 0 0 rgba(175, 82, 222, 0.4);
+}
+
+@keyframes pulseRing {
+  0% {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  100% {
+    width: 400%;
+    height: 400%;
+    opacity: 0;
+    box-shadow: 0 0 0 16rpx transparent;
+  }
+}
+
+.option-text {
+  font-size: 30rpx;
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  line-height: 1.5;
+  flex: 1;
+  transition: color 0.35s ease, font-weight 0.35s ease;
+}
+
+/* =============================================
+   题目切换动画 — 前进
+   ============================================= */
+.slide-in-right {
+  animation: slideInRight 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.25s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(80rpx); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-60rpx); }
+}
+
+/* 题目切换动画 — 返回 */
+.slide-in-left {
+  animation: slideInLeft 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.25s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-80rpx); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(60rpx); }
+}
+
+/* 底部 */
+.quiz-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: auto;
+  padding-top: 48rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  padding: 14rpx 32rpx;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-xl);
+  border: 0.5px solid var(--border);
+  transition: all 0.15s;
+}
+
+.btn-back:active {
+  background: var(--bg-hover);
+}
+
+.btn-back-icon {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.btn-disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.back-hint {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+}
+
+/* 退出确认弹窗 */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.modal-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  width: 560rpx;
+  padding: 48rpx 40rpx;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+  animation: modalIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20rpx); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-title {
+  font-size: 34rpx;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: 12rpx;
+}
+
+.modal-desc {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 40rpx;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-size: 28rpx;
+  font-weight: var(--font-semibold);
+  transition: all 0.15s;
+}
+
+.modal-btn-cancel {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border: 0.5px solid var(--border);
+}
+
+.modal-btn-confirm {
+  background: #FF3B30;
+  color: #FFFFFF;
+}

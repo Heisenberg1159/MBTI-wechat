@@ -1,0 +1,97 @@
+<view class="container" style="padding-top: {{statusBarHeight}}px">
+  <view class="nav-home">
+    <view class="nav-home-btn" bindtap="goHome">
+      <text class="nav-home-icon">⌂</text>
+      <text class="nav-home-text">首页</text>
+    </view>
+  </view>
+  <!-- 类型头 -->
+  <view class="type-hero" style="border-color: {{themeBorderColor}}">
+    <view class="type-mark" style="background: {{themeSoftColor}}">
+      <text class="type-emoji">{{typeData.emoji}}</text>
+    </view>
+    <text class="type-code" style="color: {{typeData.color}}">{{typeData.code}}</text>
+    <text class="type-name">{{typeData.name}}</text>
+    <text class="type-tagline">{{typeData.tagline}}</text>
+
+    <view class="type-traits">
+      <text class="tag" wx:for="{{typeData.traits}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 性格描述 -->
+  <view class="desc-card card">
+    <view class="section-head">
+      <text class="section-title">性格画像</text>
+    </view>
+    <text class="desc-text">{{typeData.description}}</text>
+  </view>
+
+  <!-- 优势与盲区 -->
+  <view class="sw-card card">
+    <view class="sw-section">
+      <text class="sw-label sw-strength">优势</text>
+      <view class="sw-list">
+        <view class="sw-item" wx:for="{{typeData.strengths}}" wx:key="*this">
+          <view class="sw-dot sw-dot-strength"></view>
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="divider"></view>
+    <view class="sw-section sw-section-last">
+      <text class="sw-label sw-weakness">盲区</text>
+      <view class="sw-list">
+        <view class="sw-item" wx:for="{{typeData.weaknesses}}" wx:key="*this">
+          <view class="sw-dot sw-dot-weakness"></view>
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 职业 -->
+  <view class="career-card card">
+    <view class="section-head">
+      <text class="section-title">适合探索</text>
+    </view>
+    <view class="career-list">
+      <text class="career-tag" wx:for="{{typeData.careers}}" wx:key="*this" style="background: {{themeSoftColor}}; color: {{typeData.color}}">
+        {{item}}
+      </text>
+    </view>
+  </view>
+
+  <!-- 高匹配 -->
+  <view class="compat-card card" wx:if="{{compatibleList.length > 0}}">
+    <view class="section-head">
+      <text class="section-title">高匹配类型</text>
+      <text class="section-subtitle">点击查看</text>
+    </view>
+    <view class="compat-list">
+      <view
+        class="compat-item"
+        wx:for="{{compatibleList}}"
+        wx:key="code"
+        bindtap="viewCompatible"
+        data-code="{{item.code}}"
+        style="background: {{item.softColor}}"
+      >
+        <text class="compat-emoji">{{item.emoji}}</text>
+        <view class="compat-info">
+          <text class="compat-code" style="color: {{item.color}}">{{item.code}}</text>
+          <text class="compat-name">{{item.name}}</text>
+        </view>
+        <text class="compat-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- CTA -->
+  <view class="detail-cta">
+    <button class="btn-primary" bindtap="startQuiz">测测你是什么类型</button>
+    <view class="detail-cta-link" bindtap="goMatch">
+      <text>查看与其他类型的匹配度 ›</text>
+    </view>
+  </view>
+</view>
