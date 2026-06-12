@@ -178,8 +178,8 @@
 .dim-side {
   font-size: 22rpx;
   font-weight: var(--font-semibold);
-  width: 120rpx;
-  flex-shrink: 0;
+  min-width: 100rpx;
+  flex: 0 1 auto;
 }
 
 .dim-left {
@@ -232,59 +232,113 @@
   color: var(--text-tertiary);
 }
 
-/* 16 型百科入口 */
-.types-entry {
+/* 继续上次测试 */
+.resume-card {
   display: flex;
   align-items: center;
   gap: 20rpx;
   width: 100%;
-  padding: 28rpx 32rpx;
-  margin-top: 36rpx;
-  margin-bottom: 80rpx;
+  padding: 24rpx 32rpx;
+  margin-top: 32rpx;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  transition: all 0.2s;
+  border-color: rgba(0, 122, 255, 0.18);
+  background: rgba(0, 122, 255, 0.04);
 }
 
-.types-entry:active {
-  background: var(--surface-hover);
-  border-color: var(--accent);
-  box-shadow: 0 4px 24px rgba(0, 122, 255, 0.1);
-  transform: scale(0.98);
-}
-
-.types-entry-avatars {
-  display: flex;
-  align-items: center;
+.resume-icon {
+  font-size: 40rpx;
+  line-height: 1;
   flex-shrink: 0;
 }
 
-.types-entry-emoji {
-  width: 48rpx;
-  height: 48rpx;
+.resume-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.resume-title {
+  font-size: 28rpx;
+  font-weight: var(--font-semibold);
+  color: var(--accent);
+}
+
+.resume-desc {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+}
+
+.resume-arrow {
+  font-size: 40rpx;
+  color: var(--accent);
+  font-weight: var(--font-light);
+  flex-shrink: 0;
+}
+
+/* 上次结果 */
+.latest-card {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  width: 100%;
+  padding: 24rpx 32rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.18s ease;
+}
+
+.latest-card:active {
+  transform: scale(0.98);
+}
+
+.latest-emoji {
+  width: 72rpx;
+  height: 72rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26rpx;
-  background: var(--bg-primary);
-  border-radius: 50%;
-  border: 1rpx solid var(--border);
-  margin-right: -12rpx;
+  border-radius: var(--radius-md);
+  font-size: 40rpx;
+  flex-shrink: 0;
 }
 
-.types-entry-emoji:last-child {
-  margin-right: 0;
-}
-
-.types-entry-label {
+.latest-info {
   flex: 1;
-  font-size: 28rpx;
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
 }
 
-.types-entry-arrow {
+.latest-label {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+}
+
+.latest-type {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.latest-code {
+  font-size: 30rpx;
+  font-weight: var(--font-bold);
+  letter-spacing: 2rpx;
+}
+
+.latest-name {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.latest-arrow {
   font-size: 40rpx;
   color: var(--text-tertiary);
   font-weight: var(--font-light);

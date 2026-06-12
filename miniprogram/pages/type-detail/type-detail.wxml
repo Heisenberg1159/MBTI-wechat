@@ -1,12 +1,7 @@
-<view class="container" style="padding-top: {{statusBarHeight}}px">
-  <view class="nav-home">
-    <view class="nav-home-btn" bindtap="goHome">
-      <text class="nav-home-icon">⌂</text>
-      <text class="nav-home-text">首页</text>
-    </view>
-  </view>
+<view class="container">
+  <nav-bar title="{{navTitle}}"></nav-bar>
   <!-- 类型头 -->
-  <view class="type-hero" style="border-color: {{themeBorderColor}}">
+  <view class="type-hero card page-hero" style="border-color: {{themeBorderColor}}">
     <view class="type-mark" style="background: {{themeSoftColor}}">
       <text class="type-emoji">{{typeData.emoji}}</text>
     </view>
@@ -20,7 +15,7 @@
   </view>
 
   <!-- 性格描述 -->
-  <view class="desc-card card">
+  <view class="desc-card card card-section">
     <view class="section-head">
       <text class="section-title">性格画像</text>
     </view>
@@ -28,7 +23,7 @@
   </view>
 
   <!-- 优势与盲区 -->
-  <view class="sw-card card">
+  <view class="sw-card card card-section">
     <view class="sw-section">
       <text class="sw-label sw-strength">优势</text>
       <view class="sw-list">
@@ -51,7 +46,7 @@
   </view>
 
   <!-- 职业 -->
-  <view class="career-card card">
+  <view class="career-card card card-section">
     <view class="section-head">
       <text class="section-title">适合探索</text>
     </view>
@@ -63,7 +58,7 @@
   </view>
 
   <!-- 高匹配 -->
-  <view class="compat-card card" wx:if="{{compatibleList.length > 0}}">
+  <view class="compat-card card card-section" wx:if="{{compatibleList.length > 0}}">
     <view class="section-head">
       <text class="section-title">高匹配类型</text>
       <text class="section-subtitle">点击查看</text>

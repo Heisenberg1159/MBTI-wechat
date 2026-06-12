@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.nav-bar {
+  width: 100%;
+}
+
+.nav-bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80rpx;
+  padding: 8rpx 0;
+  box-sizing: border-box;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 10rpx 24rpx;
+  background: var(--surface);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid var(--border);
+  border-radius: 28rpx;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s ease;
+}
+
+.nav-btn-hover {
+  transform: scale(0.94);
+  border-color: var(--accent);
+}
+
+.nav-btn-icon {
+  font-size: 32rpx;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.nav-home-icon {
+  font-size: 28rpx;
+}
+
+.nav-btn-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.nav-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nav-spacer {
+  width: 1rpx;
+}

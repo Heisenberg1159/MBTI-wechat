@@ -102,6 +102,11 @@ page {
   border: none;
 }
 
+.btn-secondary:active {
+  background: var(--surface-hover);
+  transform: scale(0.98);
+}
+
 /* 通用布局 */
 .container {
   display: flex;
@@ -110,6 +115,11 @@ page {
   min-height: 100vh;
   padding: 0 40rpx;
   box-sizing: border-box;
+}
+
+/* tabBar 页面底部留白（避开自定义 tabBar + 全面屏安全区） */
+.tab-safe {
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
 }
 
 /* 分割线 */
@@ -185,4 +195,284 @@ page {
   font-size: 24rpx;
   color: var(--text-secondary);
   font-weight: var(--font-medium);
+}
+
+/* =============================================
+   共享卡片模块 — result / type-detail 复用
+   ============================================= */
+
+/* 类型头卡 */
+.page-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 36rpx 40rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.type-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.type-emoji {
+  font-size: 64rpx;
+  line-height: 1;
+}
+
+.type-code {
+  font-size: 60rpx;
+  font-weight: var(--font-bold);
+  letter-spacing: 6rpx;
+  line-height: 1.1;
+}
+
+.type-name {
+  font-size: 34rpx;
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  margin-top: 8rpx;
+}
+
+.type-tagline {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  margin-top: 12rpx;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.type-traits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12rpx;
+  margin-top: 28rpx;
+}
+
+/* 区段标题 */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 28rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  display: block;
+  line-height: 1.35;
+}
+
+.section-subtitle {
+  font-size: 22rpx;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.section-subtitle-muted {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+/* 内容卡片容器 — 统一 padding/margin */
+.card-section {
+  width: 100%;
+  padding: 40rpx 36rpx;
+  margin-top: 28rpx;
+  box-sizing: border-box;
+}
+
+/* 描述文字 */
+.desc-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+/* 优势 & 盲区 */
+.sw-section {
+  margin-bottom: 28rpx;
+}
+.sw-section-last {
+  margin-bottom: 0;
+  padding-top: 28rpx;
+}
+.sw-label {
+  font-size: 24rpx;
+  font-weight: var(--font-bold);
+  margin-bottom: 16rpx;
+  display: block;
+}
+.sw-strength { color: #34C759; }
+.sw-weakness { color: #FF9500; }
+.sw-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+.sw-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.sw-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 14rpx;
+}
+.sw-dot-strength { background: #34C759; box-shadow: 0 0 6rpx rgba(52, 199, 89, 0.3); }
+.sw-dot-weakness { background: #FF9500; box-shadow: 0 0 6rpx rgba(255, 149, 0, 0.3); }
+
+/* 职业方向 */
+.career-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+.career-tag {
+  padding: 10rpx 24rpx;
+  border-radius: var(--radius-xl);
+  font-size: 22rpx;
+  font-weight: var(--font-medium);
+  line-height: 1.4;
+}
+
+/* 高匹配类型 */
+.compat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+.compat-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx 24rpx;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--border);
+  transition: all 0.15s;
+}
+.compat-item:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+.compat-emoji {
+  font-size: 36rpx;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.compat-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+.compat-code {
+  font-size: 26rpx;
+  font-weight: var(--font-bold);
+  letter-spacing: 2rpx;
+}
+.compat-name {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+.compat-arrow {
+  font-size: 36rpx;
+  color: var(--text-tertiary);
+  font-weight: var(--font-light);
+  flex-shrink: 0;
+}
+
+/* 空状态 — 统一毛玻璃卡片 */
+.empty-card {
+  width: 100%;
+  margin-top: 180rpx;
+  padding: 64rpx 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empty-icon {
+  font-size: 76rpx;
+  line-height: 1;
+  margin-bottom: 26rpx;
+}
+.empty-title {
+  font-size: 34rpx;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: 12rpx;
+}
+.empty-desc {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 34rpx;
+}
+.empty-action {
+  width: 100%;
+  margin-top: 16rpx;
+}
+
+/* 页面标题行 */
+.page-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24rpx;
+  margin-bottom: 32rpx;
+}
+.page-title {
+  font-size: 44rpx;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+.page-subtitle {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  display: block;
+  margin-top: 8rpx;
+}
+
+/* 毛玻璃按钮（返回/清除等） */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 10rpx 24rpx;
+  background: var(--surface);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  transition: all 0.15s;
+}
+.btn-glass:active {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  transform: scale(0.96);
 }

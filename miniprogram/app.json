@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/types/types",
+    "pages/match/match",
+    "pages/history/history",
     "pages/quiz/quiz",
     "pages/result/result",
-    "pages/history/history",
-    "pages/types/types",
     "pages/type-detail/type-detail",
-    "pages/share-card/share-card",
-    "pages/match/match"
+    "pages/share-card/share-card"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
@@ -15,6 +15,18 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F5F5F7",
     "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#AEAEB2",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "测试" },
+      { "pagePath": "pages/types/types", "text": "百科" },
+      { "pagePath": "pages/match/match", "text": "匹配" },
+      { "pagePath": "pages/history/history", "text": "我的" }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

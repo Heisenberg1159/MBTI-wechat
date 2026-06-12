@@ -1,7 +1,25 @@
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.bg-glow-types {
+  width: 520rpx;
+  height: 520rpx;
+  background: rgba(0, 122, 255, 0.07);
+  top: -180rpx;
+  right: -160rpx;
+}
+
 .page-header {
   width: 100%;
-  margin-top: 12rpx;
-  margin-bottom: 40rpx;
+  margin-top: 24rpx;
+  margin-bottom: 36rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .page-title {
@@ -19,19 +37,13 @@
   margin-top: 12rpx;
 }
 
-.page-header-link {
-  margin-top: 20rpx;
-  font-size: 24rpx;
-  color: var(--accent);
-  font-weight: var(--font-medium);
-}
-
 .type-grid {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20rpx;
-  padding-bottom: 80rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .type-card {

@@ -1,4 +1,4 @@
-<view class="container" style="padding-top: {{statusBarHeight}}px">
+<view class="container tab-safe" style="padding-top: {{statusBarHeight}}px">
   <!-- 背景网格 -->
   <view class="bg-grid"></view>
   <view class="bg-glow bg-glow-1"></view>
@@ -31,7 +31,10 @@
     <view class="version-card card {{selectedVersion === 'full' ? 'version-active' : ''}}" bindtap="selectVersion" data-version="full">
       <view class="version-header">
         <text class="version-name">完整版</text>
-        <view class="version-popular">
+        <view class="version-badge" wx:if="{{selectedVersion === 'full'}}">
+          <text class="version-badge-text">已选</text>
+        </view>
+        <view class="version-popular" wx:else>
           <text class="version-popular-text">推荐</text>
         </view>
       </view>
@@ -57,15 +60,26 @@
     <text class="cta-hint">仅供趣味参考，非心理诊断</text>
   </view>
 
-  <!-- 跳转 16 型百科 -->
-  <view class="types-entry card" bindtap="viewTypes">
-    <view class="types-entry-avatars">
-      <text class="types-entry-emoji">🏛️</text>
-      <text class="types-entry-emoji">🔬</text>
-      <text class="types-entry-emoji">⚔️</text>
-      <text class="types-entry-emoji">💡</text>
+  <!-- 继续上次测试 -->
+  <view class="resume-card card" wx:if="{{resume}}" bindtap="continueQuiz">
+    <view class="resume-icon">⏳</view>
+    <view class="resume-info">
+      <text class="resume-title">继续上次测试</text>
+      <text class="resume-desc">{{resume.version === 'full' ? '完整版' : '速测版'}} · 第 {{resume.current}}/{{resume.total}} 题</text>
     </view>
-    <text class="types-entry-label">浏览 16 种人格</text>
-    <text class="types-entry-arrow">›</text>
+    <text class="resume-arrow">›</text>
+  </view>
+
+  <!-- 上次结果 -->
+  <view class="latest-card card" wx:if="{{latest}}" bindtap="viewLatest">
+    <view class="latest-emoji" style="background: {{latest.softColor}}">{{latest.emoji}}</view>
+    <view class="latest-info">
+      <text class="latest-label">上次结果</text>
+      <view class="latest-type">
+        <text class="latest-code" style="color: {{latest.color}}">{{latest.code}}</text>
+        <text class="latest-name">{{latest.name}}</text>
+      </view>
+    </view>
+    <text class="latest-arrow">›</text>
   </view>
 </view>

@@ -1,25 +1,42 @@
-<view class="container" style="padding-top: {{statusBarHeight}}px">
-  <view class="nav-home">
-    <view class="nav-home-btn" bindtap="goHome">
-      <text class="nav-home-icon">⌂</text>
-      <text class="nav-home-text">首页</text>
+<view class="container tab-safe" style="padding-top: {{statusBarHeight}}px">
+  <view class="page-head">
+    <text class="page-title">测试记录</text>
+    <view class="clear-btn btn-glass" wx:if="{{list.length > 0}}" bindtap="clearHistory">
+      <text>清空</text>
     </view>
   </view>
-  <view class="page-title">测试记录</view>
 
-  <view wx:if="{{list.length === 0}}" class="empty">
+  <!-- 汇总卡 -->
+  <view class="summary-card card" wx:if="{{summary}}">
+    <view class="summary-emoji" style="background: {{summary.softColor}}">{{summary.emoji}}</view>
+    <view class="summary-info">
+      <text class="summary-line">
+        共测试 <text class="summary-strong">{{summary.total}}</text> 次
+      </text>
+      <view class="summary-dominant">
+        <text class="summary-label">最常出现</text>
+        <text class="summary-code" style="color: {{summary.color}}">{{summary.code}}</text>
+        <text class="summary-name">{{summary.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{list.length === 0}}" class="empty-result card empty-card">
     <text class="empty-icon">📋</text>
-    <text class="empty-text">还没有测试记录</text>
-    <button class="btn-primary" style="width: 320rpx; margin-top: 32rpx;" bindtap="goQuiz">去测试</button>
+    <text class="empty-title">还没有测试记录</text>
+    <text class="empty-desc">完成一次测试后，结果会出现在这里</text>
+    <button class="btn-primary empty-action" bindtap="goQuiz">去测试</button>
   </view>
 
   <view wx:else class="history-list">
     <view class="history-item" wx:for="{{list}}" wx:key="timestamp" bindtap="viewDetail" data-index="{{index}}">
+      <view class="history-emoji">{{item.emoji}}</view>
       <view class="history-left">
         <text class="history-code" style="color: {{item.color}}">{{item.typeCode}}</text>
         <text class="history-name">{{item.name}}</text>
       </view>
       <text class="history-date">{{item.dateStr}}</text>
+      <text class="history-arrow">›</text>
     </view>
   </view>
 </view>

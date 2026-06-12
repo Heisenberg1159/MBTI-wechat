@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "分享卡片"
+  "navigationStyle": "custom",
+  "backgroundColor": "#F5F5F7",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index"
+  }
 }

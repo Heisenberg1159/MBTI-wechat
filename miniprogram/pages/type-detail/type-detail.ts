@@ -38,6 +38,7 @@ Page({
     compatibleList: [] as CompatibleItem[],
     themeSoftColor: 'rgba(0, 122, 255, 0.08)',
     themeBorderColor: 'rgba(0, 122, 255, 0.18)',
+    navTitle: '',
     statusBarHeight: 0,
   },
 
@@ -50,7 +51,7 @@ Page({
 
     if (!typeData) {
       wx.showToast({ title: '类型未找到', icon: 'none' })
-      wx.navigateBack({ fail: () => wx.redirectTo({ url: '/pages/index/index' }) })
+      wx.navigateBack({ fail: () => wx.switchTab({ url: '/pages/types/types' }) })
       return
     }
 
@@ -58,6 +59,7 @@ Page({
       typeData,
       themeSoftColor: hexToRgba(typeData.color, 0.08),
       themeBorderColor: hexToRgba(typeData.color, 0.18),
+      navTitle: `${typeData.code} ${typeData.name}`,
     })
 
     // 构造兼容类型列表
@@ -72,25 +74,29 @@ Page({
         softColor: hexToRgba(item.color, 0.08),
       }))
     this.setData({ compatibleList })
-
-    // 设置导航栏标题
-    wx.setNavigationBarTitle({ title: `${typeData.code} ${typeData.name}` })
   },
 
   viewCompatible(e: WechatMiniprogram.TouchEvent) {
     const code = e.currentTarget.dataset.code as string
-    wx.navigateTo({ url: `/pages/type-detail/type-detail?code=${code}` })
+    // 用 redirectTo 替换当前详情页，避免反复点击堆叠页面栈
+    wx.redirectTo({ url: `/pages/type-detail/type-detail?code=${code}` })
   },
 
   startQuiz() {
-    wx.navigateTo({ url: '/pages/quiz/quiz' })
+    wx.navigateTo({ url: '/pages/quiz/quiz?version=full' })
   },
 
   goMatch() {
-    wx.navigateTo({ url: `/pages/match/match?code=${this.data.typeData.code}` })
+    const app = getApp<IAppOption>()
+    app.globalData.pendingMatchCode = this.data.typeData.code
+    wx.switchTab({ url: '/pages/match/match' })
   },
 
-  goHome() {
-    wx.redirectTo({ url: '/pages/index/index' })
+  onShareAppMessage() {
+    const t = this.data.typeData
+    return {
+      title: t.code ? `${t.code} ${t.name} · ${t.tagline}` : 'MBTI 16 型人格百科',
+      path: '/pages/types/types',
+    }
   },
 })

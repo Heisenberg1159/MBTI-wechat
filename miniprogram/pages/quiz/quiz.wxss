@@ -80,7 +80,7 @@
   height: 4rpx;
   background: var(--border);
   border-radius: 2rpx;
-  margin-bottom: 80rpx;
+  margin-bottom: 56rpx;
   position: relative;
   z-index: 1;
   overflow: visible;

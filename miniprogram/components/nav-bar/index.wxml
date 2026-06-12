@@ -1,0 +1,17 @@
+<view class="nav-bar" style="padding-top: {{statusBarHeight}}px">
+  <view class="nav-bar-row">
+    <view class="nav-btn" wx:if="{{showBack}}" bindtap="onBack" hover-class="nav-btn-hover">
+      <text class="nav-btn-icon">‹</text>
+      <text class="nav-btn-text">返回</text>
+    </view>
+    <view class="nav-spacer" wx:else></view>
+
+    <text class="nav-title" wx:if="{{title}}">{{title}}</text>
+
+    <view class="nav-btn nav-btn-home" wx:if="{{showHome}}" bindtap="onHome" hover-class="nav-btn-hover">
+      <text class="nav-btn-icon nav-home-icon">⌂</text>
+      <text class="nav-btn-text">首页</text>
+    </view>
+    <view class="nav-spacer" wx:else></view>
+  </view>
+</view>

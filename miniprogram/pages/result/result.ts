@@ -349,15 +349,22 @@ Page({
   },
 
   restart() {
-    wx.redirectTo({ url: '/pages/quiz/quiz' })
+    let version = 'quick'
+    try {
+      const v = wx.getStorageSync('mbti_last_version')
+      if (v === 'full' || v === 'quick') version = v
+    } catch (_e) {
+      // ignore
+    }
+    wx.redirectTo({ url: `/pages/quiz/quiz?version=${version}` })
   },
 
   viewHistory() {
-    wx.navigateTo({ url: '/pages/history/history' })
+    wx.switchTab({ url: '/pages/history/history' })
   },
 
   viewTypes() {
-    wx.navigateTo({ url: '/pages/types/types' })
+    wx.switchTab({ url: '/pages/types/types' })
   },
 
   generateCard() {
@@ -368,11 +375,15 @@ Page({
 
   viewMatch() {
     const code = this.data.hasResult ? this.data.result.typeCode : ''
-    wx.navigateTo({ url: `/pages/match/match${code ? '?code=' + code : ''}` })
+    if (code) {
+      const app = getApp<IAppOption>()
+      app.globalData.pendingMatchCode = code
+    }
+    wx.switchTab({ url: '/pages/match/match' })
   },
 
   goHome() {
-    wx.redirectTo({ url: '/pages/index/index' })
+    wx.switchTab({ url: '/pages/index/index' })
   },
 
   buildShareQuery() {

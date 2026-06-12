@@ -1,4 +1,6 @@
 {
+  "navigationStyle": "custom",
+  "backgroundColor": "#F5F5F7",
   "usingComponents": {},
-  "navigationBarTitleText": "MBTI 16 型百科"
+  "enablePullDownRefresh": false
 }

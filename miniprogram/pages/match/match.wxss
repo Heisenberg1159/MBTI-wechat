@@ -1,11 +1,29 @@
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.bg-glow-match {
+  width: 520rpx;
+  height: 520rpx;
+  background: rgba(175, 82, 222, 0.07);
+  top: -180rpx;
+  left: -160rpx;
+}
+
 .page-header {
   width: 100%;
-  margin-top: 12rpx;
+  margin-top: 24rpx;
   margin-bottom: 36rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .page-title {
-  font-size: 40rpx;
+  font-size: 44rpx;
   font-weight: var(--font-bold);
   color: var(--text-primary);
   display: block;
@@ -23,6 +41,8 @@
 .selector-section {
   width: 100%;
   margin-bottom: 8rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .selector-label {
@@ -76,13 +96,15 @@
   letter-spacing: 1rpx;
 }
 
-/* VS */
+/* VS / 交换 */
 .vs-divider {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 20rpx;
   padding: 20rpx 0;
+  position: relative;
+  z-index: 1;
 }
 
 .vs-line {
@@ -91,11 +113,31 @@
   background: var(--border);
 }
 
+.vs-swap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 24rpx;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  transition: transform 0.15s ease;
+}
+
+.vs-swap:active {
+  transform: scale(0.92) rotate(180deg);
+}
+
 .vs-text {
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: var(--font-bold);
-  color: var(--text-tertiary);
-  letter-spacing: 4rpx;
+  color: var(--text-secondary);
+  letter-spacing: 2rpx;
+}
+
+.vs-swap-icon {
+  font-size: 26rpx;
+  color: var(--accent);
 }
 
 /* 匹配结果卡 */
@@ -107,27 +149,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.score-ring-wrap {
-  margin-bottom: 12rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .score-ring {
-  width: 160rpx;
-  height: 160rpx;
+  width: 180rpx;
+  height: 180rpx;
   border-radius: 50%;
-  border: 6rpx solid;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-primary);
+  margin-bottom: 16rpx;
+  transition: background 0.5s ease;
+}
+
+.score-ring-inner {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rpx;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .score-num {
-  font-size: 44rpx;
+  font-size: 52rpx;
   font-weight: var(--font-bold);
   letter-spacing: 1rpx;
+  line-height: 1.4;
+}
+
+.score-unit {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
 }
 
 .match-level {
@@ -197,5 +255,14 @@
 .match-cta {
   width: 100%;
   margin-top: 36rpx;
-  padding-bottom: 80rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.match-cta .btn-primary,
+.match-cta .btn-secondary {
+  width: 100%;
 }

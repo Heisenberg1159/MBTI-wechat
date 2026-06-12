@@ -16,17 +16,15 @@ Page({
 
   viewDetail(e: WechatMiniprogram.TouchEvent) {
     const code = e.currentTarget.dataset.code as string
-    wx.redirectTo({
-      url: `/pages/type-detail/type-detail?code=${code}`,
-    })
+    wx.navigateTo({ url: `/pages/type-detail/type-detail?code=${code}` })
   },
 
-  goMatch() {
-    wx.navigateTo({ url: '/pages/match/match' })
+  onShareAppMessage() {
+    return { title: 'MBTI 16 型人格百科，看看你是哪一种', path: '/pages/types/types' }
   },
 
-  goHome() {
-    wx.redirectTo({ url: '/pages/index/index' })
+  onShareTimeline() {
+    return { title: 'MBTI 16 型人格百科' }
   },
 })
 

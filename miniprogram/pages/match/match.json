@@ -1,4 +1,5 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "匹配度测试"
+  "navigationStyle": "custom",
+  "backgroundColor": "#F5F5F7",
+  "usingComponents": {}
 }

@@ -1,26 +1,23 @@
-<view class="container" style="padding-top: {{statusBarHeight}}px">
-  <view class="nav-home">
-    <view class="nav-home-btn" bindtap="goHome">
-      <text class="nav-home-icon">⌂</text>
-      <text class="nav-home-text">首页</text>
-    </view>
-  </view>
-  <view class="card-preview" wx:if="{{cardReady}}">
+<view class="container">
+  <nav-bar></nav-bar>
+
+  <view class="card-stage">
     <canvas
       type="2d"
       id="shareCanvas"
-      class="share-canvas"
-      style="width: 630rpx; height: 900rpx"
+      class="share-canvas {{cardReady ? 'canvas-ready' : ''}}"
+      style="width: 630rpx; height: 920rpx"
     ></canvas>
+
+    <view class="card-loading" wx:if="{{!cardReady}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在生成卡片…</text>
+    </view>
   </view>
 
-  <view class="card-loading" wx:else>
-    <text class="loading-text">正在生成卡片...</text>
-  </view>
-
-  <view class="card-actions" wx:if="{{cardReady}}">
-    <button class="btn-primary" bindtap="saveToAlbum">保存到相册</button>
-    <button class="btn-secondary" bindtap="goBack">返回</button>
-    <text class="save-hint">保存后即可分享给朋友</text>
+  <view class="card-actions">
+    <button class="btn-primary" bindtap="saveToAlbum" disabled="{{!cardReady}}">保存到相册</button>
+    <button class="btn-secondary" open-type="share">分享给朋友</button>
+    <text class="save-hint">保存后可发朋友圈，或直接分享给好友</text>
   </view>
 </view>

@@ -1,10 +1,6 @@
-<view class="container" style="padding-top: {{statusBarHeight}}px">
-  <view class="nav-home">
-    <view class="nav-home-btn" bindtap="goHome">
-      <text class="nav-home-icon">⌂</text>
-      <text class="nav-home-text">首页</text>
-    </view>
-  </view>
+<view class="container tab-safe" style="padding-top: {{statusBarHeight}}px">
+  <view class="bg-glow bg-glow-match"></view>
+
   <view class="page-header">
     <text class="page-title">类型匹配度</text>
     <text class="page-subtitle">选择两个 MBTI 类型，查看匹配度分析</text>
@@ -30,10 +26,13 @@
     </scroll-view>
   </view>
 
-  <!-- VS -->
+  <!-- VS / 交换 -->
   <view class="vs-divider">
     <view class="vs-line"></view>
-    <text class="vs-text">VS</text>
+    <view class="vs-swap" bindtap="swapTypes">
+      <text class="vs-text">VS</text>
+      <text class="vs-swap-icon">⇅</text>
+    </view>
     <view class="vs-line"></view>
   </view>
 
@@ -60,9 +59,10 @@
   <!-- 匹配结果 -->
   <view class="match-card card" wx:if="{{match}}">
     <!-- 分数环 -->
-    <view class="score-ring-wrap">
-      <view class="score-ring" style="border-color: {{match.levelColor}}">
-        <text class="score-num" style="color: {{match.levelColor}}">{{match.score}}%</text>
+    <view class="score-ring" style="{{ringStyle}}">
+      <view class="score-ring-inner">
+        <text class="score-num" style="color: {{match.levelColor}}">{{match.score}}</text>
+        <text class="score-unit">分</text>
       </view>
     </view>
     <text class="match-level" style="color: {{match.levelColor}}">{{match.levelEmoji}} {{match.level}}</text>
@@ -79,31 +79,21 @@
       </view>
     </view>
 
-    <!-- 总览 -->
     <view class="match-section">
       <text class="match-section-title">📋 总览</text>
       <text class="match-section-text">{{match.summary}}</text>
     </view>
-
     <view class="divider"></view>
-
-    <!-- 沟通 -->
     <view class="match-section">
       <text class="match-section-title">💬 沟通</text>
       <text class="match-section-text">{{match.communication}}</text>
     </view>
-
     <view class="divider"></view>
-
-    <!-- 工作 -->
     <view class="match-section">
       <text class="match-section-title">💼 工作</text>
       <text class="match-section-text">{{match.work}}</text>
     </view>
-
     <view class="divider"></view>
-
-    <!-- 情感 -->
     <view class="match-section">
       <text class="match-section-title">❤️ 情感</text>
       <text class="match-section-text">{{match.romance}}</text>
@@ -112,6 +102,7 @@
 
   <!-- CTA -->
   <view class="match-cta">
-    <button class="btn-primary" bindtap="startQuiz">测测你的类型</button>
+    <button class="btn-primary" bindtap="startQuiz">测测我的类型</button>
+    <button class="btn-secondary" open-type="share">分享这对组合</button>
   </view>
 </view>

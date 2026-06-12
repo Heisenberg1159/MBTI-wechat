@@ -31,25 +31,29 @@ Page({
   data: {
     allTypes: ALL_TYPES,
     typeA: ALL_TYPES[0],
-    typeB: ALL_TYPES[7], // default: INTJ vs ENFP
+    typeB: ALL_TYPES[7], // 默认 INTJ vs ENFP
     match: null as MatchResult | null,
+    ringStyle: '',
     statusBarHeight: 0,
   },
 
-  onLoad(options: WechatMiniprogram.PageLoadOption) {
+  onLoad() {
     const app = getApp<IAppOption>()
     this.setData({ statusBarHeight: app.globalData.statusBarHeight })
+    this.doMatch()
+  },
 
-    // 支持从外部传入预选类型
-    const presetCode = options.code as string
-    if (presetCode) {
-      const preset = ALL_TYPES.find(t => t.code === presetCode)
-      if (preset) {
-        this.setData({ typeA: preset })
+  onShow() {
+    // 从结果页 / 详情页跳转过来时携带的预选类型
+    const app = getApp<IAppOption>()
+    const code = app.globalData.pendingMatchCode
+    if (code) {
+      app.globalData.pendingMatchCode = ''
+      const preset = ALL_TYPES.find(t => t.code === code)
+      if (preset && preset.code !== this.data.typeA.code) {
+        this.setData({ typeA: preset }, () => this.doMatch())
       }
     }
-
-    this.doMatch()
   },
 
   selectTypeA(e: WechatMiniprogram.TouchEvent) {
@@ -66,17 +70,33 @@ Page({
     this.setData({ typeB: type }, () => this.doMatch())
   },
 
+  swapTypes() {
+    this.setData({ typeA: this.data.typeB, typeB: this.data.typeA }, () => this.doMatch())
+  },
+
   doMatch() {
     if (!this.data.typeA || !this.data.typeB) return
     const result = calculateMatch(this.data.typeA.code, this.data.typeB.code)
-    this.setData({ match: result })
+    // 分数环：用 conic-gradient 画进度
+    const deg = Math.round((result.score / 100) * 360)
+    const ringStyle = `background: conic-gradient(${result.levelColor} ${deg}deg, rgba(0,0,0,0.06) ${deg}deg);`
+    this.setData({ match: result, ringStyle })
   },
 
   startQuiz() {
-    wx.navigateTo({ url: '/pages/quiz/quiz' })
+    wx.navigateTo({ url: '/pages/quiz/quiz?version=full' })
   },
 
-  goHome() {
-    wx.redirectTo({ url: '/pages/index/index' })
+  onShareAppMessage() {
+    const a = this.data.typeA
+    const b = this.data.typeB
+    return {
+      title: `${a.code} × ${b.code} 的匹配度有多高？快来看看`,
+      path: '/pages/index/index',
+    }
+  },
+
+  onShareTimeline() {
+    return { title: 'MBTI 类型匹配度测试' }
   },
 })
